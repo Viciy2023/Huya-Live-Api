@@ -1,5 +1,14 @@
 {
-  "rewrites": [
-    { "source": "/huya/:room_id", "destination": "/api/huya/:room_id" }
+  "builds": [
+    {
+      "src": "api/huya/[room_id].py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/huya/([0-9]+)",
+      "dest": "/api/huya/$1"
+    }
   ]
 }
