@@ -113,12 +113,12 @@ def get_huya_url(room_id):
         item = base_stream_list[0]
         stream_name = item.get("sStreamName", "")
 
-        # 生成 FLV 地址
-        flv_anti = item.get("sFlvAntiCode", "")
-        if flv_anti:
-            anticode = parse_anticode(flv_anti, uid, stream_name)
-            flv_url = f"{item['sFlvUrl']}/{stream_name}.{item['sFlvUrlSuffix']}?{anticode}"
-            return flv_url, None
+        # 生成 M3U8 地址
+        hls_anti = item.get("sHlsAntiCode", "")
+        if hls_anti:
+            anticode = parse_anticode(hls_anti, uid, stream_name)
+            hls_url = f"{item['sHlsUrl']}/{stream_name}.{item['sHlsUrlSuffix']}?{anticode}"
+            return hls_url, None
 
         return None, "解析失败"
 
