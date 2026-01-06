@@ -128,19 +128,10 @@ def get_huya_url(room_id):
 
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
-        # 从查询参数或路径提取房间号
-        from urllib.parse import urlparse, parse_qs
-        
-        parsed = urlparse(self.path)
-        query_params = parse_qs(parsed.query)
-        
-        # 优先从查询参数获取 room_id
-        if "room_id" in query_params:
-            room_id = query_params["room_id"][0]
-        else:
-            # 从路径提取
-            path_parts = parsed.path.split("/")
-            room_id = path_parts[-1] if path_parts else ""
+        # 从路径提取房间号 (Vercel 动态路由: /api/huya/[room_id])
+        path_parts = self.path.rstrip("/").split("/")
+        # 路径格式: /api/huya/660000 或 /api/huya/660000?xxx
+        room_id = path_parts[-1].split("?")[0] if path_parts else ""
 
         if not room_id or not room_id.isdigit():
             self.send_response(400)
