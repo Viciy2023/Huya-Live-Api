@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/huya/:room_id", "destination": "/api/huya/:room_id" }
+  ]
+}
