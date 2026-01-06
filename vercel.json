@@ -3,6 +3,10 @@
     {
       "source": "/huya/:room_id",
       "destination": "/api/huya/:room_id"
+    },
+    {
+      "source": "/proxy",
+      "destination": "/api/proxy"
     }
   ]
 }
